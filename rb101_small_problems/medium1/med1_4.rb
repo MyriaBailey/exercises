@@ -43,4 +43,4 @@ def light_switches(num)
   result
 end
 
-p light_switches(10)
+p light_switches(1000)
