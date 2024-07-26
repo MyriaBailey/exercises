@@ -1,39 +1,63 @@
 class Shelter
-  attr_accessor :adoptions
+  attr_accessor :owners, :number_of_pets
 
   def initialize
-    self.adoptions = Hash.new([])
+    self.owners = []
+    self.number_of_pets = 0
   end
 
   def adopt(owner, pet)
-    adoptions[owner.name] += [pet]
-    owner.number_of_pets += 1
+    owners << owner unless owners.include?(owner)
+
+    Pet.unadopted_pets.delete(pet)
+    owner.pets.push(pet)
   end
 
   def print_adoptions
-    adoptions.each do |owner, pets|
-      puts "#{owner} has adopted the following pets:"
-      puts pets
+    owners.each do |owner|
+      puts "#{owner.name} has adopted the following pets:"
+      puts owner.pets
       puts ''
     end
+  end
+
+  def print_unadopted_pets
+    puts "The Animal Shelter has the following unadopted pets:"
+    puts Pet.unadopted_pets
+    puts ''
+  end
+
+  def number_of_pets
+    Pet.unadopted_pets.size
   end
 end
 
 class Owner
-  attr_accessor :name, :number_of_pets
+  attr_accessor :name, :pets
 
   def initialize(name)
     self.name = name
-    self.number_of_pets = 0
+    self.pets = []
+  end
+
+  def number_of_pets
+    pets.size
   end
 end
 
 class Pet
   attr_accessor :species, :name
 
+  @@unadopted_pets = []
+
+  def self.unadopted_pets
+    @@unadopted_pets
+  end
+
   def initialize(species, name)
     self.species = species
     self.name = name
+    @@unadopted_pets << self
   end
 
   def to_s
@@ -56,14 +80,18 @@ bholmes = Owner.new('B Holmes')
 shelter = Shelter.new
 shelter.adopt(phanson, butterscotch)
 shelter.adopt(phanson, pudding)
-shelter.adopt(phanson, darwin)
+# shelter.adopt(phanson, darwin)
 shelter.adopt(bholmes, kennedy)
 shelter.adopt(bholmes, sweetie)
-shelter.adopt(bholmes, molly)
-shelter.adopt(bholmes, chester)
+# shelter.adopt(bholmes, molly)
+# shelter.adopt(bholmes, chester)
 shelter.print_adoptions
+
+shelter.print_unadopted_pets
+
 puts "#{phanson.name} has #{phanson.number_of_pets} adopted pets."
 puts "#{bholmes.name} has #{bholmes.number_of_pets} adopted pets."
+puts "The Animal shelter has #{shelter.number_of_pets} unadopted pets."
 
 =begin
 P Hanson has adopted the following pets:
