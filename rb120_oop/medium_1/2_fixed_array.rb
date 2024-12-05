@@ -9,16 +9,19 @@ class FixedArray
   end
 
   def []=(idx, val)
-    arr.fetch(idx)
+    arr.fetch(idx) # could have used self[index] to reuse prev method
     arr[idx] = val
   end
 
   def to_a
-    arr
+    arr # Solution used .clone (prolly to match other to_class methods)
   end
 
   def to_s
-    arr.inspect
+    arr.inspect # Solution used to_a.to_s ... Can't remember reason for
+    # inspect specifically, since to_s also works here...
+    # Was there something off in IRB about it? iirc the decision came
+    # from issues with [] and "" and nil showing up right...
   end
 
   private

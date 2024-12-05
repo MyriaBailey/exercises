@@ -7,13 +7,21 @@ class Machine
     self.flip_switch(:off)
   end
 
+  # Somewhat confusing further exploration description, but done?
+  def get_switch
+    switch
+  end
+
   private
-  attr_writer :switch
+  
+  attr_accessor :switch
 
   def flip_switch(desired_state)
     self.switch = desired_state
   end
 end
 
-thing = Machine.new.start
+thing = Machine.new
+thing.start
 p thing
+p thing.get_switch
