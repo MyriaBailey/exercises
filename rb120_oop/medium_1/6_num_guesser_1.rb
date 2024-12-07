@@ -33,6 +33,28 @@ Data structures/Algorithms
 - Determining high/low/win as a method
 
 
+Analyzing Solution:
+- Instead of creating lots of if-then statements, sol. uses hashes like:
+
+  RESULT_OF_GUESS_MESSAGE = {
+    high:  "Your number is too high.",
+    low:   "Your number is too low.",
+    match: "That's the number!"
+  }.freeze
+
+  WIN_OR_LOSE = {
+    high:  :lose,
+    low:   :lose,
+    match: :win
+  }.freeze
+
+  RESULT_OF_GAME_MESSAGE = {
+    win:  "You won!",
+    lose: "You have no more guesses. You lost!"
+  }.freeze
+
+- These hashes allow for printing Whatever the value for the given key is
+- Removes lots of basic logic and simplifies the code :]
 
 =end
 

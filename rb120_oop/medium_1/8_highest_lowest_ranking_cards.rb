@@ -3,6 +3,8 @@ class Card
 
   attr_reader :rank, :suit
 
+  # Solution sets face cards to 11-14 in a hash, and then `value`
+  # fetches the rank, substituting the actual number rank if not found
   RANKING_ORDER = (2..10).to_a + %w(Jack Queen King Ace)
 
   def initialize(rank, suit)
@@ -15,6 +17,7 @@ class Card
   end
 
   def <=>(other_card)
+    # By creating a new `value` method, can just value <=> other.value
     idx_1 = RANKING_ORDER.index(rank)
     idx_2 = RANKING_ORDER.index(other_card.rank)
     

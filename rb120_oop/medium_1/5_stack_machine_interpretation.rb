@@ -1,3 +1,21 @@
+=begin
+Comparing solved answer vs solution
+
+- Solution created multiple, more specific errors (of same syntax)
+  - MinilangError, BadTokenError, EmptyStackError
+- Each custom error included the word Error at the end
+  - This helps distinguish btwn an "EmptyStack" object, and an Error
+- By having this structure, both BadTokenError and EmptyStackError
+  can be given a message when raised, and rescued in the same MinilangError
+  clause and printed with e.message
+
+- Solution also created a Set object (an array optimized like a hash)
+  containing all the possible commands
+  - Having an explicit set of accepted commands is necessary encapsulation!
+  - Imagine if a minilang command was "EVAL" or "INITIALIZE"...
+  - That would be sent along and evaluated without a NoMethodError!!
+=end
+
 class EmptyStack < StandardError; end
 
 class Minilang
