@@ -104,8 +104,6 @@ class RomanNumeral
       numeral << current_numeral
     end
     
-
-    # p digit_chunks(@num)
     numeral
   end
 
